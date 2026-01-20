@@ -1,0 +1,16 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    # Run every 14 minutes
+    - cron: "*/14 * * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend
+        run: |
+          # Replace with your actual Render URL after deployment
+          curl -I https://rag-backend.onrender.com/api/metrics/recent || echo "Endpoint down or not configured."
