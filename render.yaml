@@ -3,6 +3,7 @@ services:
   - type: web
     name: rag-backend
     runtime: python
+    plan: free
     buildCommand: |
       cd backend
       pip install -r requirements.txt
@@ -13,13 +14,14 @@ services:
       - key: PYTHON_VERSION
         value: 3.10.0
       - key: DATA_DIR
-        value: /tmp/data # Use tmp for writeable storage on ephemeral instances
+        value: /tmp/data
     autoDeploy: true
 
-  # Frontend Service (Optional, Render can host static sites too)
+  # Frontend Service
   - type: web
     name: rag-frontend
     runtime: node
+    plan: free
     buildCommand: |
       cd frontend
       npm install
