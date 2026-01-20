@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Upload, FileText, Check, AlertCircle, Trash2 } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function DocumentManager() {
     const [uploading, setUploading] = useState(false);
     const [status, setStatus] = useState(null); // { type: 'success'|'error', msg: '' }
-
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
     const handleUpload = async (e) => {
         const file = e.target.files[0];

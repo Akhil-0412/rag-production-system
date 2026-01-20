@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { BarChart2, Zap, DollarSign, Activity } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function MetricsDashboard() {
     const [metrics, setMetrics] = useState([]);
     const [summary, setSummary] = useState({ total: 0, avgLatency: 0, cost: 0 });
-
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
     const fetchMetrics = async () => {
         try {

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Send, User, Bot, Loader2, BookOpen } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function QueryInterface() {
     const [query, setQuery] = useState("");
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    // Use environment variable or default to localhost:8000
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -17,7 +15,7 @@ export default function QueryInterface() {
         // Add user message
         const userMsg = { role: 'user', content: query };
         setHistory(prev => [...prev, userMsg]);
-        setLimitLoading(true);
+        setLoading(true);
 
         try {
             const res = await axios.post(`${API_URL}/query`, {
@@ -39,13 +37,10 @@ export default function QueryInterface() {
             console.error(err);
             setHistory(prev => [...prev, { role: 'error', content: "Error fetching response." }]);
         } finally {
-            setLimitLoading(false);
+            setLoading(false);
             setQuery("");
         }
     };
-
-    // Need to fix setLimitLoading typo to setLoading
-    const setLimitLoading = setLoading;
 
     return (
         <div className="flex flex-col h-[calc(100vh-100px)]">
